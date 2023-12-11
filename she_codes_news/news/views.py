@@ -41,14 +41,14 @@ class AddStoryView(generic.CreateView):
 # detail view for 1 particular user
 class AuthorDetailView(generic.DetailView):
     model = CustomUser
-    Template_name = 'news/author.html'
+    template_name = 'news/author.html'
     context_object_name = 'author'
     #get user
     def get_object(self, *args, **kwargs):
         return get_object_or_404(CustomUser, username=self.kwargs['username'])
         
-    #also get their stories
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['latest_stories'] = NewsStory.objects.filter (author__id=self.object.id)
-        return context 
+    # #also get their stories
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     # context['latest_stories'] = NewsStory.objects.filter (author__id=self.object.id)
+    #     return context 
