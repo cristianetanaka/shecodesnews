@@ -19,6 +19,9 @@ from django.urls import include, path
 urlpatterns = [
     path('news/', include('news.urls')),
     path('admin/', admin.site.urls),
+    #path('', include('news.urls')),
     path('users/', include('users.urls')),
     path('users', include('django.contrib.auth.urls'))
 ]
+
+# included line 22 to make news as a principal page ( include news in the root dormain)
