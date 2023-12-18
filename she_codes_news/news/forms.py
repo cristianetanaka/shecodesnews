@@ -7,12 +7,12 @@ class Storyform(ModelForm):
         model = NewsStory
         fields = ['title', 'pub_date', 'image_url', 'content']
         widgets = { 
-            'pub_date': forms.DateInput(
-            format= '%m/%d/%Y',
+            'pub_date': forms.DateTimeInput(
+            format= '%d/%m/%Y',
             attrs={
                 'class':'form-control',
                 'placeholder':'Select a date',
-                'type':'date'
+                'type':'datetime-local'
                 }
             ),
         }
