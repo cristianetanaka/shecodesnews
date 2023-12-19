@@ -1,9 +1,10 @@
 from django.urls import reverse_lazy
-from django.views.generic.edit import CreateView
-from django.shortcuts import render, redirect
+#from django.urls import reverse
+from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.decorators import login_required
-from django.views import View
+from django.utils.decorators import method_decorator
 from django.contrib import messages
+from django.shortcuts import render, redirect
 from .forms import CustomUserCreationForm, CustomUserChangeForm, UserProfile 
 
 
@@ -21,32 +22,30 @@ class CreateAccountView(CreateView):
 
 @login_required # user must be login to access view
               
-def profileView(request):
-    user_profile = UserProfile.objects.get(user=request.user)
-    return render(request, 'users/profile.html', {'user_profile' : user_profile})
+def profileview (request):
+    user_profile, created = UserProfile.objects.get_or_create(user=request.user)
+    return render(request, 'users/profile.html', {'UserProfile' : UserProfile})
 
-@login_required
+@method_decorator(login_required, name='dispatch')
 
-class UpdateProfileView(View):
+class UpdateProfileView(UpdateView):
+    model = UserProfile
+    form_class = CustomUserChangeForm
     template_name = 'users/updateprofile.html'
+    success_url = reverse_lazy('users:profile')
 
-    def get(self, request, *args, **kwargs):
-        user_form = CustomUserChangeForm(instance=request.user)
-        profile_form = UserProfile(instance=request.user.userprofile)
-        return render(request, self.template_name, {'user_form': user_form, 'profile_form': profile_form})
+    def get_object(self, queryset=None):
+        return self.request.user.userprofile
 
-    def post(self, request, *args, **kwargs):
-        user_form = CustomUserChangeForm(request.POST, instance=request.user)
-        profile_form = UserProfile(request.POST, instance=request.user.userprofile)
+    def form_valid(self, form):
+        messages.success(self.request, 'Profile updated successfully!')
+        return super().form_valid(form)
 
-        if user_form.is_valid() and profile_form.is_valid():
-            user_form.save()
-            profile_form.save()
-            messages.success(request, 'Profile updated successfully!')
-            return redirect('profile')
-        else:
-            messages.error(request, 'Error updating your profile. Please correct the errors below.')
-            return render(request, self.template_name, {'user_form': user_form, 'profile_form': profile_form})
-
+    def form_invalid(self, form):
+        messages.error(self.request, 'Error updating your profile. Please correct the errors below.')
+        return super().form_invalid(form)
+    
+    def get_success_url(self):
+        return reverse('profileview', kwargs={'pk' : self.object.pk})
 
 

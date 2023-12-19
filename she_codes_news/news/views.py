@@ -1,5 +1,6 @@
 from django.views import generic
 from django.urls import reverse_lazy
+from django.shortcuts import render
 from .models import NewsStory
 from .forms import Storyform
 from users.models import CustomUser
@@ -17,11 +18,14 @@ class IndexView(generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        #context['latest_stories'] = NewsStory.objects.all().order_by('-pub_date')[:4]
-        #context['latest_stories'] = NewsStory.objects.all().order_by('-pub_date')[:4]
         context['latest_stories'] = NewsStory.objects.all().order_by('-pub_date')[:4]
-        #context['latest_stories'] = NewsStory.objects.all()[:4]
         return context
+
+def index(request):
+    all_stories = NewsStory.objects.all()
+    context = {'all_stories': all_stories}
+    return render(request, 'news/index.html', context)
+
 
 class StoryView(generic.DetailView):
     model = NewsStory
@@ -36,7 +40,7 @@ class AddStoryView(generic.CreateView):
 
     def form_valid(self, form):
         form.instance.author = self.request.user
-        return super() .form_valid(form)
+        return super().form_valid(form)
     
 # detail view for 1 particular user
 class AuthorDetailView(generic.DetailView):
@@ -47,8 +51,4 @@ class AuthorDetailView(generic.DetailView):
     def get_object(self, *args, **kwargs):
         return get_object_or_404(CustomUser, username=self.kwargs['username'])
         
-    # #also get their stories
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     # context['latest_stories'] = NewsStory.objects.filter (author__id=self.object.id)
-    #     return context 
+   
