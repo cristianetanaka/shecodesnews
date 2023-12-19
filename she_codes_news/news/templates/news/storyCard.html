@@ -1,3 +1,9 @@
+
+
+
+
+{% block content %}
+
 <div class="story-card" id="story-card-{{ position }}">
     <a href="{% url 'news:story' story.id %}">
         {% if story.image_url %}
@@ -6,9 +12,19 @@
             <img src="https://picsum.photos/600">
         {% endif %}
         <div class="story-card-text">
-            <h3>{{ story.title }} {% if request.user.is_authenticated %}<a href="{% url 'news:update_story' story.id %}"><small>[Edit]</small></a><a href="{% url 'news:delete_story' story.id %}"><small>[Delete]</small></h3>{% endif %}
+            current user: {{user.id }}
+            story author: {{story.author.id }}
+            <h3>{{ story.title }} 
             <h4>{{ story.author }}</h4>
             <h4>{{ story.pub_date }} </h4>
+
+            {% if request.user.is_authenticated %}
+                {% if user.id == story.author.id %}
+                    <a href="{% url 'news:update_story' story.id %}"><small>[Edit]</small></a>
+                    <a href="{% url 'news:delete_story' story.id %}"><small>[Delete]</small></h3>
+                {% endif %}
+            {% endif %}    
         </div>
     </a>
 </div>
+{% endblock %}
