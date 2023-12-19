@@ -36,7 +36,7 @@ class UpdateProfileView(UpdateView):
     template_name = 'users/updateprofile.html'
     success_url = reverse_lazy('users:profile')
 
-    def get_object(self, queryset=None):
+    def get_object(self):
         return self.request.user.userprofile
 
     def form_valid(self, form):

@@ -41,6 +41,15 @@ class AddStoryView(generic.CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+
+class UpdateStoryView(generic.UpdateView):
+    model = NewsStory
+    #form_class = NewsStory
+    template_name = 'news/updatestory.html'
+    fields = ['title','image_url', 'pub_date', 'content']
+    success_url = reverse_lazy('news:index')
+
+
     
 # detail view for 1 particular user
 class AuthorDetailView(generic.DetailView):
