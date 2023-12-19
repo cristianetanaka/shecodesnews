@@ -2,9 +2,10 @@ from django.urls import reverse_lazy
 #from django.urls import reverse
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.decorators import login_required
+from .models import CustomUser, UserProfile
 from django.utils.decorators import method_decorator
 from django.contrib import messages
-from django.shortcuts import render, redirect
+from django.shortcuts import render, reverse
 from .forms import CustomUserCreationForm, CustomUserChangeForm, UserProfile 
 
 
@@ -22,8 +23,9 @@ class CreateAccountView(CreateView):
 
 @login_required # user must be login to access view
               
-def profileview (request):
-    user_profile, created = UserProfile.objects.get_or_create(user=request.user)
+def profileview (request,pk):
+    user = CustomUser.objects.get(pk=pk)
+    #user_profile, created = UserProfile.objects.get_or_create(user=request.user)
     return render(request, 'users/profile.html', {'UserProfile' : UserProfile})
 
 @method_decorator(login_required, name='dispatch')
@@ -46,6 +48,6 @@ class UpdateProfileView(UpdateView):
         return super().form_invalid(form)
     
     def get_success_url(self):
-        return reverse('profileview', kwargs={'pk' : self.object.pk})
+        return reverse('users:profileview', kwargs={'pk' : self.object.pk})
 
 

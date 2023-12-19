@@ -3,7 +3,7 @@
   {% if request.user.is_authenticated %}
   <ul>  
       <li><a href="#"><span class="orange">Hey, {{ user.username }}! </span></a></li>
-      <li><a href="{% url 'users:profileview' %}">My Account</a></li>
+      <li><a href="{% url 'users:profileview' pk=request.user.pk %}">My Account</a></li>
       <li><a href="{% url 'news:index' %}">Home </a></li>
       <li><a href="{% url 'news:newStory' %}">Write a story </a></li>
       

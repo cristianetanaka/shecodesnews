@@ -8,6 +8,6 @@ app_name = 'users'
 
 urlpatterns = [
     path('createaccount/', CreateAccountView.as_view(), name='createAccount'),
-    path('profile/', profileview, name='profileview'),
+    path('profile/<int:pk>/', profileview, name='profileview'),
     path('updateprofile/<int:user_id>/', UpdateProfileView.as_view(), name='updateprofile'),
 ]
