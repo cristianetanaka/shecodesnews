@@ -49,8 +49,20 @@ class UpdateStoryView(generic.UpdateView):
     fields = ['title','image_url', 'pub_date', 'content']
     success_url = reverse_lazy('news:index')
 
+class DeleteStoryView(generic.DeleteView):
+    model = NewsStory
+    template_name = 'news/deletestory.html'
+    fields = ['title','image_url', 'pub_date', 'content']
+    success_url = reverse_lazy('news:index')
 
-    
+    def delete(self, request, *args, **kwargs):
+        return super().delete(request, *args, **kwargs)
+
+
+
+
+
+
 # detail view for 1 particular user
 class AuthorDetailView(generic.DetailView):
     model = CustomUser

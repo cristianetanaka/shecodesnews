@@ -30,6 +30,8 @@ def profileview (request,pk):
 
 @method_decorator(login_required, name='dispatch')
 
+
+
 class UpdateProfileView(UpdateView):
     model = UserProfile
     form_class = CustomUserChangeForm
@@ -38,16 +40,12 @@ class UpdateProfileView(UpdateView):
 
     def get_object(self):
         return self.request.user.userprofile
-
     def form_valid(self, form):
         messages.success(self.request, 'Profile updated successfully!')
         return super().form_valid(form)
-
     def form_invalid(self, form):
         messages.error(self.request, 'Error updating your profile. Please correct the errors below.')
         return super().form_invalid(form)
     
     def get_success_url(self):
-        return reverse('users:profileview', kwargs={'pk' : self.object.pk})
-
-
+       return reverse('users:profileview', kwargs={'pk' : self.object.pk})
