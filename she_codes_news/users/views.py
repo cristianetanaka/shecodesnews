@@ -5,14 +5,6 @@ from .models import CustomUser
 from .forms import CustomUserCreationForm
 
 
-class AccountView(generic.DetailView):
-    model = CustomUser
-    template_name = 'users/account.html'
-    context_object_name = 'account'
-
-    def get_object(self, queryset=None):
-        return self.request.user
-
 class CreateAccountView(generic.CreateView):
     form_class = CustomUserCreationForm
     success_url = reverse_lazy('login')
@@ -21,12 +13,24 @@ class CreateAccountView(generic.CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+    
+class AccountView(generic.DetailView):
+    model = CustomUser
+    template_name = 'users/account.html'
+    context_object_name = 'account'
+
+    def get_object(self, queryset=None):
+        return self.request.user
 
 class UpdateAccountView(generic.UpdateView):
     model = CustomUser
-    template_name = 'users/updateaccount.html'
     form_class = CustomUserCreationForm
-    success_url = reverse_lazy('users:account')
+    template_name = 'users/updateaccount.html'
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
 
 class DeleteAccountView(generic.DeleteView):
     model = CustomUser
