@@ -1,30 +1,27 @@
-
-
-
-
 {% block content %}
 
 <div class="story-card" id="story-card-{{ position }}">
     <a href="{% url 'news:story' story.id %}">
         {% if story.image_url %}
-            <img src={{story.image_url}}>
+            <img src="{{ story.image_url }}" alt="Story Image">
         {% else %}
-            <img src="https://picsum.photos/600">
+            <img src="https://picsum.photos/600" alt="Default Image">
         {% endif %}
         <div class="story-card-text">
-            current user: {{user.id }}
-            story author: {{story.author.id }}
-            <h3>{{ story.title }} 
+            current user: {{ user.id }}
+            story author: {{ story.author.id }}
+            <h3>{{ story.title }} </h3>
             <h4>{{ story.author }}</h4>
             <h4>{{ story.pub_date }} </h4>
-
             {% if request.user.is_authenticated %}
                 {% if user.id == story.author.id %}
                     <a href="{% url 'news:update_story' story.id %}"><small>[Edit]</small></a>
-                    <a href="{% url 'news:delete_story' story.id %}"><small>[Delete]</small></h3>
+                    <a href="{% url 'news:delete_story' story.id %}"><small>[Delete]</small></a>
                 {% endif %}
             {% endif %}    
         </div>
     </a>
 </div>
+
+
 {% endblock %}

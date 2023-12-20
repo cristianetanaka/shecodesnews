@@ -17,4 +17,11 @@
         </div>
     </div>
 
+    <form action="{% url 'news:like_post' story.id %}" method="POST">
+        {% if story.id %}
+           {% csrf_token %}
+           <button type="submit" name="post_id" value="{{ story.id }}" class="btn-primary btn-sm">Like</button>
+        {% endif %}
+     </form>
+     
 {% endblock %}

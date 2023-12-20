@@ -1,7 +1,7 @@
 # users/forms.py
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from .models import CustomUser, UserProfile
+from django.contrib.auth.forms import UserCreationForm
+from .models import CustomUser
 
 #Creation of New User
 class CustomUserCreationForm(UserCreationForm):
@@ -10,16 +10,5 @@ class CustomUserCreationForm(UserCreationForm):
         model = CustomUser        
         fields = ['username', 'email', 'bio']
         
-#create a user profile form(optional)
 
-class UserProfileForm(forms.ModelForm):
-    class Meta:        
-        model = UserProfile        
-        #fields = ['bio', 'profile_picture'] #bio is user's biography and avatar user's profile picture
-        fields = ['bio'] #bio is user's biography 
-        
-class CustomUserChangeForm(UserChangeForm):
-    class Meta:        
-        model = CustomUser        
-        fields = ['username', 'email', 'bio']
         

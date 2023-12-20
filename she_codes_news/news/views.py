@@ -1,12 +1,15 @@
+from typing import Any
 from django.views import generic
 from django.urls import reverse_lazy
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import NewsStory
 from .forms import Storyform
 from users.models import CustomUser
-from django.shortcuts import get_object_or_404
 
-
+def like_post(request, post_id):
+    post = get_object_or_404(NewsStory, pk=post_id)
+    post.likes.add(request.user)
+    return redirect('news:story', pk=post_id)
 
 class IndexView(generic.ListView):
     template_name = 'news/index.html'
@@ -21,17 +24,16 @@ class IndexView(generic.ListView):
         context['latest_stories'] = NewsStory.objects.all().order_by('-pub_date')[:4]
         return context
 
-def index(request):
-    all_stories = NewsStory.objects.all()
-    context = {'all_stories': all_stories}
-    return render(request, 'news/index.html', context)
-
-
 class StoryView(generic.DetailView):
     model = NewsStory
     template_name = 'news/story.html'
     context_object_name = 'story'
-   
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['latest_stories'] = NewsStory.objects.all().order_by('-pub_date')[:4]
+        return context
+    
 class AddStoryView(generic.CreateView):
     form_class = Storyform
     context_object_name = 'storyform'
@@ -44,32 +46,19 @@ class AddStoryView(generic.CreateView):
 
 class UpdateStoryView(generic.UpdateView):
     model = NewsStory
-    #form_class = NewsStory
     template_name = 'news/updatestory.html'
-    fields = ['title','image_url', 'pub_date', 'content']
+    fields = ['title', 'image_url', 'pub_date', 'content']
     success_url = reverse_lazy('news:index')
 
 class DeleteStoryView(generic.DeleteView):
     model = NewsStory
     template_name = 'news/deletestory.html'
-    fields = ['title','image_url', 'pub_date', 'content']
     success_url = reverse_lazy('news:index')
 
-    def delete(self, request, *args, **kwargs):
-        return super().delete(request, *args, **kwargs)
-
-
-
-
-
-
-# detail view for 1 particular user
 class AuthorDetailView(generic.DetailView):
     model = CustomUser
     template_name = 'news/author.html'
     context_object_name = 'author'
-    #get user
+
     def get_object(self, *args, **kwargs):
         return get_object_or_404(CustomUser, username=self.kwargs['username'])
-        
-   
