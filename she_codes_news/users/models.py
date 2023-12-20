@@ -1,23 +1,11 @@
 from django.db import models
-from django.conf import settings
-
-#create your models here
 from django.contrib.auth.models import AbstractUser
+from django.contrib.auth import get_user_model
 
-#Abstract User is a default user ( Authentitication functionality)
+# Abstract User is a default user (Authentication functionality)
 class CustomUser(AbstractUser):
-   bio = models.TextField(blank=True)
-   pass
+    username = models.CharField(max_length=150, unique=True)
+    email = models.EmailField(unique=True)
 
-   def __str__(self):
-       return self.username
-
-#1) Create a user ProfileModel
-   
-class UserProfile(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE) #associate one user to one profile
-    bio = models.TextField()
-    
     def __str__(self):
-       return self.user.username
-                                     
+        return self.username

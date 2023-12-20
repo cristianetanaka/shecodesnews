@@ -1,13 +1,14 @@
 # users/urls.py
 from django.urls import path
-from .views import CreateAccountView
-from .views import profileview 
-from users.views import UpdateProfileView
+from .views import CreateAccountView, AccountView,UpdateAccountView,DeleteAccountView
+
+
 
 app_name = 'users'
 
 urlpatterns = [
     path('createaccount/', CreateAccountView.as_view(), name='createAccount'),
-    path('profile/<int:pk>/', profileview, name='profileview'),
-    path('updateprofile/<int:pk>/', UpdateProfileView.as_view(), name='updateprofile'),
+    path('account/<int:pk>/', AccountView.as_view(), name='accountview'),
+    path('updateaccount/<int:pk>/', UpdateAccountView.as_view(), name='updateaccount'),
+    path('deleteaccount/<int:pk>/', DeleteAccountView.as_view(), name='deleteaccount'),
 ]
