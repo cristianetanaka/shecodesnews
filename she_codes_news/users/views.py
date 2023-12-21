@@ -3,7 +3,7 @@ from django.views import generic
 from django.urls import reverse_lazy
 from .models import CustomUser
 from .forms import CustomUserCreationForm
-from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 class CreateAccountView(generic.CreateView):
     form_class = CustomUserCreationForm
@@ -27,10 +27,11 @@ class UpdateAccountView(generic.UpdateView):
     form_class = CustomUserCreationForm
     template_name = 'users/updateaccount.html'
 
-    def get_sucess_url(self):
-        return reverse_lazy('AccountView', args=[str(self.object.id)])
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
 
-class DeleteAccountView(LoginRequiredMixin, generic.DeleteView):
+class DeleteAccountView(generic.DeleteView):
     model = CustomUser
     template_name = 'users/deleteaccount.html'
     success_url = reverse_lazy('news:index')

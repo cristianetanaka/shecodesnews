@@ -14,6 +14,10 @@ class NewsStory(models.Model):
     pub_date = models.DateTimeField()
     content = models.TextField()
     image_url = models.URLField(null=True, blank=True)
+    likes = models.ManyToManyField(User, related_name= 'blog_post')
+
+    def total_likes(self):
+        return self.likes.count()
     
     class Meta:
         ordering = ['-pub_date'] 

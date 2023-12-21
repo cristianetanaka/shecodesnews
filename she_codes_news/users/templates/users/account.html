@@ -1,0 +1,29 @@
+<!-- Include nav bar in this page -->
+{%extends 'base.html' %}
+<!-- include static css files -->
+{% load static %}
+<!-- include stylesheet -->
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{% static 'news/styles.css' %}" />
+{% endblock %}
+
+{% block content %}
+
+<h1> {{user.username}}'s Profile</h1>
+<h2>My Details</h2>
+
+<div class="account">
+    current user: {{ user.id }}
+    <h3>username: {{ user.username }} </h3>
+    <h4>Email: {{ user.email }}</h4>
+    <h4>Bio: {{ user.Bio }}</h4>
+    {% if request.user.is_authenticated %}
+
+            <a href="{% url 'users:updateaccount' user.id  %}"><small>[Edit]</small></a>
+            <a href="{% url 'users:deleteaccount' user.id  %}"><small>[Delete]</small></a>
+       
+    {% endif %}    
+</div>
+   
+
+{% endblock %}
