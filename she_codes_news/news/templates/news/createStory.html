@@ -2,7 +2,8 @@
 {% block content %}
 <form action="" method="post">
     {% csrf_token %}
-    <h1 class="h3 mb-3 font-weight-normal">Create New Story</h1>
+    <h1 class="h3 mb-3 font-weight-normal">Tell us... </h1>
+    <h2 class="h3 mb-3 font-weight-normal">Your best travel stories </h2>
     {{ form.as_p }}
     <button class="btn btn-lg btn-primary btn-block mt-5" type="submit">Submit</button>
 </form>

@@ -1,21 +1,25 @@
 <nav>
-  <div id="navbar" >
+  <div class= "navbar" >
+
   {% if request.user.is_authenticated %}
   <ul>  
-      <li><a href="#"><span class="orange">Hey, {{ user.username }}! </span></a></li>
-      <li><a href="{% url 'users:accountview' pk=request.user.pk %}">My Account</a></li>
-      <li><a href="{% url 'news:index' %}">Home </a></li>
-      <li><a href="{% url 'news:newStory' %}">Write a story </a></li>
-      <li><a href="{% url 'logout' %}">Logout</a></li>
+    <a href="{% url 'users:accountview' pk=request.user.pk %}">My Account</a>
+    <a href="{% url 'news:index' %}">Home </a>
+    <a href="{% url 'logout' %}">Logout</a>
+    <a href="{% url 'news:newStory' %}">Write a story </a>
+
+    <br>
+    <a href="#"><span class="orange">Welcome {{ user.username }}! </span></a>
+    <br/>
   </ul>
   {% else %}
   <ul>
-      <li><a href="{% url 'news:index' %}">Home </a></li>
-      <li><a href="{% url 'users:createAccount' %}">Create Account </a></li>
-      <li><a href="{% url 'login' %}">Login </a></li>
+    <a href="{% url 'news:index' %}">Home </a>
+    <a href="{% url 'login' %}">Login </a>
+    <a href="{% url 'users:createAccount' %}">Create Account </a>
+    
   </ul>  
   {% endif %}
-  
   
   </div>
 </nav>

@@ -7,11 +7,17 @@
 
 {% block content %}
     <h2>Create Account</h2>
-    <form method="post" class = "form"> 
-        {% csrf_token %}
-        {{ form.as_p}}
-        <button type="submit">Create Account</button>
-    </form>
+    <section class = "form-container">
+        <div class ="form">
+            <form method="post">        
+                {% csrf_token %}        
+                {{ form.as_p }}
+        </div>
+            <input type="submit" class = "submit_button" value="submit"> 
+    
+        </form>
+    </section>
+    
 {% endblock %}
 
 

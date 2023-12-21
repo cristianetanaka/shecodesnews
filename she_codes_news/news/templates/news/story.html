@@ -24,4 +24,15 @@
         {% endif %}
      </form>
      
+     <div class="story-card-text">
+        Current user: {{ user.id }}
+        Story author: {{ story.author.id }}
+        {% if request.user.is_authenticated %}
+            {% if user.id == story.author.id %}
+                <a href="{% url 'news:update_story' story.id %}"><small>[Edit]</small></a>
+                <a href="{% url 'news:delete_story' story.id %}"><small>[Delete]</small></a>
+            {% endif %}
+        {% endif %}    
+    </div>
+     
 {% endblock %}

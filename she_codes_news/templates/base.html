@@ -18,14 +18,19 @@
         <header>
             <div id="header-text">
                 <a id="header-link" href="{% url 'news:index' %}">
-                    <h1>She {Codes} News</h1>
+                    <h1>Travel Stories News</h1>
                 </a>
             </div>
+            <div id="navbar">
             <!-- include nav here -->
             {% include './nav.html' %}
+            </div>
         </header>
 
         {% block content %}{% endblock %}
+        <footer>
+            <p> Travel {Stories} News |  Cristiane Oshiro Tanaka all rights reserved</p>
+        </footer>
     </body>
 </html>
  

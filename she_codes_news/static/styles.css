@@ -11,10 +11,11 @@ header {
     border-bottom: 1px solid #000;
 }
 
+
 h1 {
-    font-family: 'Montserrat Subrayada', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     text-decoration: none;
-    font-size: 4rem;
+    font-size: 3rem;
     margin: 0;
 }
 
@@ -28,12 +29,13 @@ h3 {
 }
 
 #header-text {
-    flex-basis: 80%;
+    flex-basis: 90%;
     display: flex;
+    
 }
 
-nav {
-    flex-basis: 20%;
+#navbar {
+    flex-basis: 40%;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -48,3 +50,4 @@ a {
 a, p {
     font-family: monospace;
 }
+
