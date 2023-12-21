@@ -1,5 +1,5 @@
-
-<div id="navbar" >
+<nav>
+  <div id="navbar" >
   {% if request.user.is_authenticated %}
   <ul>  
       <li><a href="#"><span class="orange">Hey, {{ user.username }}! </span></a></li>
@@ -15,6 +15,7 @@
       <li><a href="{% url 'login' %}">Login </a></li>
   </ul>  
   {% endif %}
-
- 
-</div>
+  
+  
+  </div>
+</nav>
