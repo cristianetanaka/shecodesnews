@@ -8,7 +8,6 @@
 
 {% block content %}
     <br>
-    <a href="{% url 'news:newStory' %}">Write New Story</a>
     <h2>Stories for {{author.username}} </h2>
     <div id="latest-stories">
         {% if author.stories.all %}

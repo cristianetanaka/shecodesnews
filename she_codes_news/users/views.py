@@ -2,7 +2,7 @@ from typing import Any
 from django.views import generic
 from django.urls import reverse_lazy
 from .models import CustomUser
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, CustomUserChangeForm
 
 
 class CreateAccountView(generic.CreateView):
@@ -27,9 +27,8 @@ class UpdateAccountView(generic.UpdateView):
     form_class = CustomUserCreationForm
     template_name = 'users/updateaccount.html'
 
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)
+    def get_object(self, queryset=None):
+        return self.request.user
 
 class DeleteAccountView(generic.DeleteView):
     model = CustomUser

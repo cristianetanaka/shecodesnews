@@ -34,11 +34,13 @@ h3 {
     
 }
 
-#navbar {
-    flex-basis: 40%;
+nav {
+    flex-basis: 60%;
     display: flex;
+    align-content: stretch;
     flex-direction: column;
     align-items: flex-end;
+    justify-content: space-between;
 }
 
 a {
