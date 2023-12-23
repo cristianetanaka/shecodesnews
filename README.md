@@ -27,10 +27,10 @@ This is a Travel blog that allows:
 4. View the She Codes News site: http://localhost:8000/news
 
 ## Database Schema
-![My ERD](she_codes_news/static/db_schema.png)
+![My ERD]
 
 ## Project Features
-Link to Youtube: 
+Link to Youtube: https://www.youtube.com/watch?v=XspzppJZmU8
 
 ### Required Features:
 - [X] Log-in/log-out functions
@@ -52,7 +52,7 @@ Link to Youtube:
 - [X] Like Button
 
 ### Further improvements
--[X] Updated account does not fully work. Further investigation needs to be done using what was covered in class using class instead of function.
--[X] Like button needs to be fully deployed with total count of likes
--[X] forms needs to be fully styled so as the Website.
--[X] comments and serach function to be implemented
+- [X] Updated account does not fully work. Further investigation needs to be done using what was covered in class using class instead of function.
+- [X] Like button needs to be fully deployed with total count of likes
+- [X] forms needs to be fully styled so as the Website.
+- [X] comments and serach function to be implemented
