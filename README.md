@@ -27,7 +27,7 @@ This is a Travel blog that allows:
 4. View the She Codes News site: http://localhost:8000/news
 
 ## Database Schema
-![My DB Schema](<she_codes_news/static/DB Diagram.png>)
+![Alt text](<she_codes_news/static/DB Diagram.png>)
 
 
 ## Project Features
@@ -57,3 +57,5 @@ Link to Youtube: https://www.youtube.com/watch?v=XspzppJZmU8
 - [X] Like button needs to be fully deployed with total count of likes
 - [X] forms needs to be fully styled so as the Website.
 - [X] comments and serach function to be implemented
+
+[def]: <she_codes_news/static/DB Diagram.png>
