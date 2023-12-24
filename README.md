@@ -27,7 +27,7 @@ This is a Travel blog that allows:
 4. View the She Codes News site: http://localhost:8000/news
 
 ## Database Schema
-![My ERD]
+![My ERD](\she_codes_news\static\images\DB Diagram.png)
 
 ## Project Features
 Link to Youtube: https://www.youtube.com/watch?v=XspzppJZmU8
